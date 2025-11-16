@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class SubstitutionCipher {
+
+    public static String encrypt(String text, String key) {
+        text = text.toUpperCase();
+        StringBuilder result = new StringBuilder();
+
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                result.append(key.charAt(c - 'A'));
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }
+
+    public static String decrypt(String text, String key) {
+        text = text.toUpperCase();
+        StringBuilder result = new StringBuilder();
+
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                result.append((char) ('A' + key.indexOf(c)));
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter text: ");
+        String text = sc.nextLine();
+
+        System.out.print("Enter 26-letter key: ");
+        String key = sc.nextLine().toUpperCase();
+
+        String encrypted = encrypt(text, key);
+        String decrypted = decrypt(encrypted, key);
+
+        System.out.println("Encrypted: " + encrypted);
+        System.out.println("Decrypted: " + decrypted);
+    }
+}
